@@ -1,11 +1,37 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background: linear-gradient(136.34deg, #3C81A7 6.1%, #7CA58E 103.06%);}
+
+.label {
+  font-style: normal;
+font-weight: 700;
+font-size: 37px;
+line-height: 44px;
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #FFFFFF;
 }
+
+  .title {
+font-style: normal;
+font-weight: 700;
+font-size: 88px;
+line-height: 106px;
+/* identical to box height */
+
+text-align: center;
+
+color: #FFFFFF;
+
+text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.5);
+  }
 
 .description {
   display: inherit;
