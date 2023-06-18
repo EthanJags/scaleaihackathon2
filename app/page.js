@@ -24,19 +24,21 @@ export default function Home() {
   const [showSTL, setShowSTL] = React.useState(false);
   const [justification, setJustification] = React.useState("");
   const [stlGenerator, setSTLGenerator] = React.useState("");
+  const [url, setURL] = React.useState("https://raw.githubusercontent.com/EthanJags/STL/a229478dc1ab0db3190518e6f94c060e5c0f49b9/Sphere.stl");
+  const [requirementsReady, setRequirementsReady] = React.useState(false);
 
   const handleDisabledSubmit = (e) => {
     alert("Please enter a request")
   }
   const handleSubmit = (e) => {
     setRequirements("");
-    generateRequirements({query, setRequirements})
+    generateRequirements({query, setRequirements, setRequirementsReady})
   }
 
   const handleSTL = (e) => {
     console.log("generate STL clicked")
-    generateSTL({requirements, setJustification})
-    setShowSTL(true);
+    generateSTL({query, setJustification, setURL, setShowSTL})
+    // setShowSTL(true);
   }
 //   return (
 //     <main className={styles.main}>
@@ -46,7 +48,7 @@ export default function Home() {
 //       <CustomButton isQueryPresent={!!query} handleDisabledSubmit={handleDisabledSubmit} handleSubmit={handleSubmit} title={"Generate Requirements"} />
 //       {requirements && <Requirements requirements={requirements}/>}
 //       {requirements && <CustomButton isQueryPresent={!!query} handleDisabledSubmit={handleDisabledSubmit} handleSubmit={handleSTL} title={"Generate STL File"}/>}
-//       <STLViewer url="https://threejs.org/examples/models/stl/ascii/slotted_disk.stl" />
+      // <STLViewer url="https://threejs.org/examples/models/stl/ascii/slotted_disk.stl" />
 //     </main>
 //   )
 // }
@@ -113,13 +115,17 @@ export default function Home() {
             </div>
                   </div>
                   </div>}
-            {requirements && <Button
+            {requirementsReady &&
+             <Button
           className="bg-blue-600 rounded-xl text-white font-medium px-4 py-3 m-3 mb-7 hover:bg-blue-500 transition"
           onClick={handleSTL} 
           >
           Generate STL
-        </Button>}
-          {showSTL && <STLViewer url={stlGenerator} />}
+        </Button>
+}
+        {/* <STLViewer url="https://threejs.org/examples/models/stl/ascii/slotted_disk.stl" /> */}
+{showSTL && <STLViewer url={url}/>}
+
           {showSTL && <Justification title={"Explanation"} requirements={justification}/>}
       </main>
       <Footer />

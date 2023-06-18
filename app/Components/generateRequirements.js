@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const generateRequirements = async ({query, setRequirements, }) => {
+const generateRequirements = async ({query, setRequirements, setRequirementsReady}) => {
 
   let requirementsPrompt = [
     {
@@ -17,8 +17,7 @@ const generateRequirements = async ({query, setRequirements, }) => {
     },
     {"role": "user", "content": `${query}`},
   ];
-
-
+  // console.log("requirements prompt", requirementsPrompt);
   // setLoading(true);
   const response = await fetch("/api/generate", {
     method: "POST",
@@ -52,6 +51,7 @@ const generateRequirements = async ({query, setRequirements, }) => {
     setRequirements((prev) => prev + chunkValue);
   }
   console.log("Output from requirements GPT: ", )
+  setRequirementsReady(true);
     
 };
 
