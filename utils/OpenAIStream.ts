@@ -37,12 +37,13 @@ import {
       method: "POST",
       body: JSON.stringify(payload),
     });
-    
+
     const stream = new ReadableStream({
       async start(controller) {
         // callback
         function onParse(event: ParsedEvent | ReconnectInterval) {
           if (event.type === "event") {
+
             const data = event.data;
             // https://beta.openai.com/docs/api-reference/completions/create#completions/create-stream
             if (data === "[DONE]") {
@@ -75,7 +76,7 @@ import {
         }
       },
     });
-  
+
     return stream;
   }
   

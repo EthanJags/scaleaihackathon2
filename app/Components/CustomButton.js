@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 
-const CustomButton = ({ isQueryPresent, handleDisabledSubmit, handleSubmit }) => {
+const CustomButton = ({ isQueryPresent, handleDisabledSubmit, handleSubmit, title }) => {
   if (isQueryPresent) {
     return (
       <Button 
@@ -16,7 +16,7 @@ const CustomButton = ({ isQueryPresent, handleDisabledSubmit, handleSubmit }) =>
           fontWeight: "bold",
         }}
       >
-        Begin
+        {title}
       </Button>
     );
   }
@@ -35,7 +35,7 @@ const CustomButton = ({ isQueryPresent, handleDisabledSubmit, handleSubmit }) =>
         fontWeight: "bold",
       }}
     >
-      Begin
+      {title}
     </Button>
   );
 };

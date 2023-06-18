@@ -47,6 +47,10 @@ const STLViewer = ({ url }) => {
             const material = new THREE.MeshPhongMaterial({ color: 0xffffff, specular: 0x111111, shininess: 200 });
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
+
+            // Change camera position
+            camera.position.set(5, 5, 5);
+            controls.update(); // need to update controls after change in camera
         });
 
         // Animation
@@ -65,7 +69,7 @@ const STLViewer = ({ url }) => {
         };
     }, [url]);
 
-    return <div ref={containerRef} style={{ width: '600px', height: '600px' }} />;
+    return <div ref={containerRef} style={{ width: '800px', height: '600px' }} />;
 };
 
 export default STLViewer;

@@ -43,28 +43,14 @@ const styles = {
 }
 
 const MyComponent = ({ requirements, title }) => {
-  const [isEditable, setEditable] = useState(false);
 
-  // Split requirements string into lines and render each line separately
-  const formattedRequirements = requirements.split('\n').map((line, index) => 
-    <React.Fragment key={index}>
-      {line}
-      <br/>
-    </React.Fragment>
-  );
 
   return (
     <div style={styles.container} className="max-w-6xl">
       <p style={styles.title}>{title}</p>
-      <div style={styles.text} contentEditable={isEditable}>
-        {formattedRequirements}
+      <div style={styles.text}>
+        {requirements}
       </div>
-      <button 
-        style={styles.editButton}
-        onClick={() => setEditable(!isEditable)}
-      >
-        {isEditable ? 'Save' : 'Edit'}
-      </button>
     </div>
   );
 }

@@ -10,7 +10,7 @@ const SearchBar = ({query, setQuery}) => {
         container: {
             // display: 'flex',
             // flexDirection: 'column',
-            margin: '30px auto',
+            margin: '20px auto 0px auto',
             alignItems: 'center',
 
             position: 'relative',
@@ -35,7 +35,7 @@ const SearchBar = ({query, setQuery}) => {
     }
 
     return (
-        <div style={styles.container}>
+        <div style={styles.container} className="max-w-6xl">
             <input 
                 type="text" 
                 style={styles.searchBar} 
