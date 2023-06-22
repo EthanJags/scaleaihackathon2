@@ -15,6 +15,7 @@ import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import SquigglyLines from "./Components/SquigglyLines";
 import Justification from './Components/Justification'
+import generateJustification from "./Components/generateJustification";
 
 
 
@@ -27,9 +28,16 @@ export default function Home() {
   const [url, setURL] = React.useState("https://raw.githubusercontent.com/EthanJags/STL/a229478dc1ab0db3190518e6f94c060e5c0f49b9/Sphere.stl");
   const [requirementsReady, setRequirementsReady] = React.useState(false);
 
+
   const handleDisabledSubmit = (e) => {
     alert("Please enter a request")
   }
+
+  const triggerAction = (e) => {
+
+    generateJustification({query, setJustification, setRequirementsReady, url});
+  }
+
   const handleSubmit = (e) => {
     setRequirements("");
     generateRequirements({query, setRequirements, setRequirementsReady})
@@ -37,7 +45,7 @@ export default function Home() {
 
   const handleSTL = (e) => {
     console.log("generate STL clicked")
-    generateSTL({query, setJustification, setURL, setShowSTL})
+    generateSTL({query, setJustification, setURL, setShowSTL, triggerAction})
     // setShowSTL(true);
   }
 //   return (
@@ -126,7 +134,7 @@ export default function Home() {
         {/* <STLViewer url="https://threejs.org/examples/models/stl/ascii/slotted_disk.stl" /> */}
 {showSTL && <STLViewer url={url}/>}
 
-          {showSTL && <Justification title={"Explanation"} requirements={justification}/>}
+          {/* {justification && <Justification title={"Explanation"} requirements={justification}/>} */}
       </main>
       <Footer />
     </div>
