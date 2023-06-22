@@ -1,5 +1,5 @@
 "use client";
-
+import React from 'react';
 import Image from 'next/image'
 import styles from './page.module.css'
 import SearchBar from '../app/Components/SearchBar'
@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Soasft Robasotics AI</h1>
+      <h1 className={styles.title}>Soft Robasotics AI</h1>
       <SearchBar requestBar={query} setRequestBar={setQuery} />
     </main>
   )
