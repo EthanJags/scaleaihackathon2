@@ -45,6 +45,7 @@ const generateRequirements = async ({query, setRequirements, setRequirementsRead
     done = doneReading;
     const chunkValue = decoder.decode(value);
     setRequirements((prev) => prev + chunkValue);
+    console.log("chunk from req:", chunkValue)
   }
   console.log("Output from requirements GPT: ", )
   setRequirementsReady(true);

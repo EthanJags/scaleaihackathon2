@@ -21,9 +21,11 @@ import {
     max_tokens: number;
     stream: boolean;
     n: number;
+    functions?: any;
+    function_call?: any;
   }
   
-  export async function OpenAIStream(payload: OpenAIStreamPayload) {
+  export async function OpenAIStream(payload: OpenAIStreamPayload, whichLine: boolean) {
     const encoder = new TextEncoder();
     const decoder = new TextDecoder();
     // console.log("openaistreampayload: ", payload);
@@ -37,6 +39,11 @@ import {
       method: "POST",
       body: JSON.stringify(payload),
     });
+
+    // console.log("start");
+    // // console.log("res: ", res);
+    // const data = await res.text();
+    // console.log("finish", data);
 
     const stream = new ReadableStream({
       async start(controller) {
@@ -52,7 +59,12 @@ import {
             }
             try {
               const json = JSON.parse(data);
-              const text = json.choices[0].delta?.content || "";
+              let text;
+              if (whichLine) {
+                text = json.choices[0].delta?.content || "";
+              } else {
+                text = json.choices[0].delta?.function_call?.arguments || "";
+              }
               if (counter < 2 && (text.match(/\n/) || []).length) {
                 // this is a prefix character (i.e., "\n\n"), do nothing
                 return;

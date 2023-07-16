@@ -25,19 +25,43 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response("No prompt in the request", { status: 400 });
   }
 
+  const functions = [
+    {
+      "name": "output_format",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "row": {
+            "type": "integer",
+            "description": "integer that staisfies prompt"
+          },
+          "justification": {
+            "type": "string",
+            "description": "reason why row was chosen"
+          },
+        },
+        "required": ["row", "justification"]
+      },
+    },
+  ];
+
   const payload: OpenAIStreamPayload = {
-    model: "gpt-4",
+    model: "gpt-3.5-turbo-0613",
     messages: messages,
-    temperature: 0.2,
+    temperature: 1,
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
     max_tokens: 1000,
     stream: true,
     n: 1,
+    functions: functions,
+    function_call: { "name": "output_format" }
   };
 
-  const stream = await OpenAIStream(payload);
+  // console.log("payload: ", payload);
+
+  const stream = await OpenAIStream(payload, false);
   // console.log(new Response(stream));
   return new Response(stream);
 };

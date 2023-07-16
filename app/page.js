@@ -14,8 +14,10 @@ import Link from "next/link";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import SquigglyLines from "./Components/SquigglyLines";
-import Justification from './Components/Justification'
+import Justification from './Components/Justification';
 import generateJustification from "./Components/generateJustification";
+import Equations from "./Components/Equations.js"
+// import generateRequirements from "./Components/generateRequirements";
 
 
 
@@ -23,6 +25,8 @@ export default function Home() {
   const [query, setQuery] = React.useState("");
   const [requirements, setRequirements] = React.useState("");
   const [showSTL, setShowSTL] = React.useState(false);
+  const [equations, setEquations] = React.useState("");
+
   const [justification, setJustification] = React.useState("");
   const [stlGenerator, setSTLGenerator] = React.useState("");
   const [url, setURL] = React.useState("https://raw.githubusercontent.com/EthanJags/STL/a229478dc1ab0db3190518e6f94c060e5c0f49b9/Sphere.stl");
@@ -45,7 +49,7 @@ export default function Home() {
 
   const handleSTL = (e) => {
     console.log("generate STL clicked")
-    generateSTL({query, setJustification, setURL, setShowSTL, triggerAction})
+    generateSTL({query, setJustification, setURL, setShowSTL, triggerAction, setEquations})
     // setShowSTL(true);
   }
 //   return (
@@ -132,9 +136,10 @@ export default function Home() {
         </Button>
 }
         {/* <STLViewer url="https://threejs.org/examples/models/stl/ascii/slotted_disk.stl" /> */}
+{equations && <Equations title={"Equation"} requirements={equations}/>}
 {showSTL && <STLViewer url={url}/>}
 
-          {/* {justification && <Justification title={"Explanation"} requirements={justification}/>} */}
+          {justification && <Justification title={"Explanation"} requirements={justification}/>}
       </main>
       <Footer />
     </div>
